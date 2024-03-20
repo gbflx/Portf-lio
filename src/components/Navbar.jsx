@@ -7,6 +7,7 @@ import { logo, menu, close } from "../assets";
 
 const Navbar = () => {
   const [active, setActive] = useState("");
+  const [toggle, setToggle] = useState(false);
 
   return (
     <nav>
@@ -22,16 +23,33 @@ const Navbar = () => {
       <img src={logo} alt='logo' className='w-9 h-9 object-contain' />
       <p className='text-white text-[18px] font-bold cursor-pointer flex '>
         Gabriel &nbsp;
-        <span className='sm:block hidden'> | Ge</span>
+        <span className='sm:block hidden'> | Gfelix</span>
       </p>
     </Link>
     <ul className="list-none hidden sm:flex flex-row gap-10">
-      {navLinks.maps((Link) => (
-        <li>
-          <a href={`#${nav.id}`}></a>
+      {navLinks.map((Link) => (
+        <li
+        key={Link.id}
+        className={`${
+          active === Link.title
+          ? "text-white"
+          : "text-secondary"
+        } hover:text-white text-[18px] font-medium cursor-pointer`}
+        onClick={() => setActive(Link.title)}
+        >
+          <a href={`#${Link.id}`}>{Link.title}</a>
         </li>
       ))}
     </ul>
+    <div className="sm:hidden felx flex-1 justify-end items-center">
+    <img
+    src={menu}
+    alt="menu"
+    className="w-[28px] h-[28px] object-contain cursor-pointe"
+    onClick={() => setToggle(!toggle)}
+    
+    />
+    </div>
       </div>
     </nav>
   );
